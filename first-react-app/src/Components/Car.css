@@ -1,0 +1,36 @@
+.car {
+  border: black 1px solid;
+  margin: 10px;
+  border-radius: 50%;
+  width: 5em;
+  height: 5em;
+  text-align: center;
+  line-height: 5em;
+  float: left;
+  cursor: pointer;
+  transition: all 0.5s ease;
+}
+
+.car:hover {
+  font-size: 1.4em;
+}
+
+.ford {
+  background-color: blue;
+  color: white;
+}
+
+.honda {
+  background-color: silver;
+}
+
+.skoda {
+  background-color: purple;
+  color: white;
+}
+
+.volvo {
+  background-color: green;
+  color: white;
+}
+
