@@ -15,15 +15,32 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Build image
-        run: cd first-backend && docker build . --file Dockerfile --tag image
+      - name: Build backend image
+        run: docker build ./first-backend --file Dockerfile --tag backend_image
+
+      - name: Build db image
+        run: docker build ./db --file Dockerfile --tag db_image
 
       - name: Log into registry
         run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login docker.pkg.github.com -u ${{ github.actor }} --password-stdin
 
-      - name: Push image
+      - name: Push backend image
         run: |
-          IMAGE_ID=docker.pkg.github.com/${{ github.repository }}/cbc_jns2020_first_backend
+          IMAGE_ID=docker.pkg.github.com/${{ github.repository }}/backend
+          # Strip git ref prefix from version
+          VERSION=$(echo "${{ github.ref }}" | sed -e 's,.*/\(.*\),\1,')
+          # Strip "v" prefix from tag name
+          [[ "${{ github.ref }}" == "refs/tags/"* ]] && VERSION=$(echo $VERSION | sed -e 's/^v//')
+          # Use Docker `latest` tag convention
+          [ "$VERSION" == "master" ] && VERSION=latest
+          echo IMAGE_ID=$IMAGE_ID
+          echo VERSION=$VERSION
+          docker tag image $IMAGE_ID:$VERSION
+          docker push $IMAGE_ID:$VERSION
+
+      - name: Push backend image
+        run: |
+          IMAGE_ID=docker.pkg.github.com/${{ github.repository }}/db
           # Strip git ref prefix from version
           VERSION=$(echo "${{ github.ref }}" | sed -e 's,.*/\(.*\),\1,')
           # Strip "v" prefix from tag name
