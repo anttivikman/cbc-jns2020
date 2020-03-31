@@ -23,7 +23,7 @@ jobs:
 
       - name: Push image
         run: |
-          IMAGE_ID=docker.pkg.github.com/${{ github.repository }}/cbc-jns2020-first-backend
+          IMAGE_ID=docker.pkg.github.com/${{ github.repository }}/cbc_jns2020_first_backend
           # Strip git ref prefix from version
           VERSION=$(echo "${{ github.ref }}" | sed -e 's,.*/\(.*\),\1,')
           # Strip "v" prefix from tag name
