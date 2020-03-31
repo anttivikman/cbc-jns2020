@@ -15,4 +15,4 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Build the Backend Docker image
-      run: docker build . --file first-backend/Dockerfile --tag code-bootcamp-first-backend:$(date +%s)
+      run: cd first-backend && docker build . --file Dockerfile --tag code-bootcamp-first-backend:$(date +%s)
