@@ -1,18 +1,20 @@
 import React from "react";
-import PropTypes from "prop-types"
+import PropTypes from "prop-types";
 import "./Fruit.css";
 
 export default function Fruit(props) {
   return (
     <div className={`fruit ${props.type}`}>
       {props.children}
-      {props.onDelete && <button onClick={event => props.onDelete()}>X</button>}
+      {props.onDelete && (
+        <button onClick={(event) => props.onDelete()}>X</button>
+      )}
     </div>
   );
 }
 
 Fruit.propTypes = {
-  type: PropTypes.oneOf(['apple', 'pear', 'orange']).isRequired,
+  type: PropTypes.oneOf(["apple", "pear", "orange"]).isRequired,
   children: PropTypes.string.isRequired,
-  onDelete: PropTypes.func
-}
+  onDelete: PropTypes.func,
+};

@@ -1,13 +1,13 @@
-import React from 'react';
-import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'  
-import './App.css';
+import React from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import "./App.css";
 
 import NavBar from "./Components/NavBar";
 import Fruits from "./Components/Fruits";
 import Cars from "./Components/Cars";
 import Corona from "./Components/Corona";
 
-const Home = (props) => <div>Tämä on koti</div>
+const Home = (props) => <div>Tämä on koti</div>;
 
 // All new
 function App() {
@@ -16,14 +16,17 @@ function App() {
       <NavBar />
       <Switch>
         <Route exact path="/" component={Home} />
-        <Route path="/fruits"><Fruits /></Route>
-        <Route path="/cars"><Cars /></Route>
+        <Route path="/fruits">
+          <Fruits />
+        </Route>
+        <Route path="/cars">
+          <Cars />
+        </Route>
         <Route path="/corona" component={Corona} />
         <Route render={() => "404 - Not Found!"} />
       </Switch>
     </Router>
   );
 }
-
 
 export default App;

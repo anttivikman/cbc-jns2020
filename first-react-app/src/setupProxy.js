@@ -1,13 +1,13 @@
-const { createProxyMiddleware } = require('http-proxy-middleware');
-module.exports = function(app) {
+const { createProxyMiddleware } = require("http-proxy-middleware");
+module.exports = function (app) {
   console.log(app);
   app.use(
-    '/api',
+    "/api",
     createProxyMiddleware({
-      target: 'http://localhost:4001',
+      target: "http://localhost:4001",
       pathRewrite: {
-        '^/api/': '/'
-      }
+        "^/api/": "/",
+      },
     })
   );
 };
