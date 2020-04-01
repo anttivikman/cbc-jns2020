@@ -6,6 +6,7 @@ const app = express();
 app.use(bodyParser.json());
 const port = 4001;
 
+app.use("/files", express.static("public"));
 app.get("/hello", (req, res) => res.send("Hello World, I am here"));
 
 app.get("/fruits", (req, res) => fruits.getFruits(req, res));
