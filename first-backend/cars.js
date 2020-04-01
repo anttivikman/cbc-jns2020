@@ -7,10 +7,20 @@ const db = pgp({
   password: process.env.POSTGRES_PASSWORD || "postgres",
 });
 
-const getCars = (req, res) =>
-  db
-    .any("SELECT * FROM cars")
+const getCars = (req, res) => {
+  const { offset = 0, limit = 20 } = req.query;
+  db.any("SELECT * FROM cars ORDER BY model OFFSET $1 LIMIT $2", [
+    offset,
+    limit,
+  ])
     .then((carListFromDb) => res.send(carListFromDb))
+    .catch((error) => res.status(500).send(error));
+};
+
+const getCarsCount = (req, res) =>
+  db
+    .any("SELECT COUNT(id) FROM cars")
+    .then((carCountFromDb) => res.send(carCountFromDb[0]))
     .catch((error) => res.status(500).send(error));
 
 const addCar = (req, res) => {
@@ -44,6 +54,7 @@ const removeCar = (req, res) => {
 
 module.exports = {
   getCars,
+  getCarsCount,
   addCar,
   removeCar,
 };
