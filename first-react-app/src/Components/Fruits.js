@@ -35,9 +35,23 @@ export default function Fruits(props) {
     );
   });
 
+  const totals = fruits.reduce((runningTotals, fruit) => {
+    return {
+      ...runningTotals,
+      [fruit.type]: (runningTotals[fruit.type] || 0) + 1,
+    };
+  }, {});
+
   return (
     <React.Fragment>
       <AddFruit onFruitAdded={(newFruit) => setFruits([...fruits, newFruit])} />
+      <div>
+        {Object.keys(totals).map((key) => (
+          <span key={key}>
+            {key}: {totals[key]}
+          </span>
+        ))}
+      </div>
       <div className="fruits">{fruitElements}</div>
     </React.Fragment>
   );
