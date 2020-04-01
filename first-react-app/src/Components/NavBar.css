@@ -5,6 +5,10 @@
 .nav-bar a {
   color: white;
 }
+  
+.nav-bar a.active {
+  font-weight: 700;
+}
 
 .nav-bar ul {
   list-style-type: none;

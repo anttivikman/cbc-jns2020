@@ -1,23 +1,48 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
+import classNames from "classnames";
 
 import "./NavBar.css";
 
 export default function NavBar(props) {
+  const history = useHistory();
+  const currentPath = history.location.pathname;
+
   return (
     <div className="nav-bar">
       <ul>
         <li>
-          <Link to="/">Home</Link>
+          <Link to="/" className={classNames({ active: currentPath === "/" })}>
+            Home
+          </Link>
         </li>
         <li>
-          <Link to="/fruits">Fruits</Link>
+          <Link
+            to="/fruits"
+            className={classNames({
+              active: currentPath.startsWith("/fruits"),
+            })}
+          >
+            Fruits
+          </Link>
         </li>
         <li>
-          <Link to="/cars">Cars</Link>
+          <Link
+            to="/cars"
+            className={classNames({ active: currentPath.startsWith("/cars") })}
+          >
+            Cars
+          </Link>
         </li>
         <li>
-          <Link to="/corona">Corona</Link>
+          <Link
+            to="/corona"
+            className={classNames({
+              active: currentPath.startsWith("/corona"),
+            })}
+          >
+            Corona
+          </Link>
         </li>
       </ul>
     </div>
