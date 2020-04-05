@@ -15,15 +15,16 @@ const getFruits = (req, res) =>
 
 const addFruit = (req, res) => {
   const fruit = req.body;
-  db.one("INSERT INTO fruits(type, name) VALUES($1, $2) RETURNING id", [
-    fruit.type,
-    fruit.name,
-  ])
+  db.one(
+    "INSERT INTO fruits(type, name, image) VALUES($1, $2, $3) RETURNING id",
+    [fruit.type, fruit.name, fruit.image]
+  )
     .then((result) => {
       res.send({
         id: result.id,
         type: fruit.type,
         name: fruit.name,
+        image: fruit.image,
       });
     })
     .catch((error) => res.status(500).send(error));

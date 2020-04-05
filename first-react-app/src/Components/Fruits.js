@@ -28,6 +28,7 @@ export default function Fruits(props) {
       <Fruit
         key={fruitData.id}
         type={fruitData.type}
+        image={fruitData.image}
         onDelete={() => onDelete(fruitData.id)}
       >
         {fruitData.name}

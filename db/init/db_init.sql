@@ -1,7 +1,8 @@
 CREATE TABLE fruits (
   id serial PRIMARY KEY,
   "type" varchar NOT NULL,
-  name varchar NOT NULL
+  name varchar NOT NULL,
+  image jsonb
 );
 
 CREATE TABLE cars (

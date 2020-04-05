@@ -5,6 +5,12 @@ import "./Fruit.css";
 export default function Fruit(props) {
   return (
     <div className={`fruit ${props.type}`}>
+      {props.image?.path && (
+        <img
+          style={{ width: "20px", height: "20px" }}
+          src={`/api/${props.image.path}`}
+        />
+      )}
       {props.children}
       {props.onDelete && (
         <button onClick={(event) => props.onDelete()}>X</button>

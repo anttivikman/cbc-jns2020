@@ -4,6 +4,7 @@ export default class AddFruit extends React.Component {
   state = {
     type: "",
     name: "",
+    image: null,
   };
 
   handleInputChange(event) {
@@ -12,6 +13,18 @@ export default class AddFruit extends React.Component {
     const inputName = target.name;
 
     this.setState({ [inputName]: value });
+  }
+
+  upload(file) {
+    var formData = new FormData();
+    formData.append("fruitImage", file);
+    fetch("/api/fruits/upload", {
+      method: "POST",
+      body: formData,
+    })
+      .then((response) => response.json())
+      .then((data) => this.setState({ image: data }))
+      .catch((error) => console.log(error));
   }
 
   onSave(event) {
@@ -27,11 +40,12 @@ export default class AddFruit extends React.Component {
       .then((response) => response.json())
       .then((newFruit) => {
         this.props.onFruitAdded(newFruit);
-        this.setState({ type: "", name: "" });
+        this.setState({ type: "", name: "", image: null });
       });
   }
 
   render() {
+    console.log("IMAGE", this.state.image);
     return (
       <React.Fragment>
         <form onSubmit={(event) => this.onSave(event)}>
@@ -59,6 +73,19 @@ export default class AddFruit extends React.Component {
               type="text"
               name="name"
               onChange={(event) => this.handleInputChange(event)}
+            />
+          </div>
+          <div>
+            <label>Kuva:</label>
+            {this.state.image?.path && (
+              <img
+                style={{ width: "100px", height: "100px" }}
+                src={`/api/${this.state.image?.path}`}
+              />
+            )}
+            <input
+              type="file"
+              onChange={(event) => this.upload(event.target.files[0])}
             />
           </div>
           <button type="submit">Lisää</button>
