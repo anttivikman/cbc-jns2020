@@ -1,0 +1,25 @@
+version: "3.4"
+services:
+  frontend:
+    build: ./first-react-app
+    ports:
+      - 80:80
+  backend:
+    build: ./first-backend
+    environment:
+      - POSTGRES_HOST
+      - POSTGRES_USER
+      - POSTGRES_PASSWORD
+      - POSTGRES_DB
+    volumes:
+      - ./first-backend:/usr/src/app
+    ports:
+      - 4001:4001
+  db:
+    build: ./db
+    environment:
+      - POSTGRES_USER
+      - POSTGRES_PASSWORD
+      - POSTGRES_DB
+    ports:
+      - 5433:5432
