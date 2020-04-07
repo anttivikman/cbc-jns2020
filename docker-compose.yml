@@ -4,6 +4,10 @@ services:
     build: ./first-react-app
     ports:
       - 80:80
+    depends_on:
+      - backend
+    volumes:
+      - ./first-react-app/production_nginx_default.conf:/etc/nginx/conf.d/default.conf
   backend:
     build: ./first-backend
     environment:
@@ -15,6 +19,8 @@ services:
       - ./first-backend:/usr/src/app
     ports:
       - 4001:4001
+    depends_on:
+      - db
   db:
     build: ./db
     environment:
