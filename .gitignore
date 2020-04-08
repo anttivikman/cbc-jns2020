@@ -1,2 +1,4 @@
 node_modules/
 first-backend/uploads/
+robotfw/reports/
+!robotfw/reports/.keep

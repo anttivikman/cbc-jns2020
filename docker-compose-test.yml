@@ -1,0 +1,11 @@
+version: "3.4"
+services:
+  tests:
+    image: ppodgorsek/robot-framework
+    volumes:
+      - ./robotfw/reports:/opt/robotframework/reports
+      - ./robotfw/suits:/opt/robotframework/tests
+    environment:
+      BROWSER: chrome
+    depends_on:
+      - frontend
