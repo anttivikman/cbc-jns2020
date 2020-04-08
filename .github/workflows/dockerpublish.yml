@@ -14,11 +14,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Robot Framework
-        uses: joonvena/robotframework-docker-action@v0.1
-        env:
-          BROWSER: chrome
-          ROBOT_TESTS_DIR: ${{ github.workspace }}/robotfw/suits
-          ROBOT_REPORTS_DIR: ${{ github.workspace }}/robotfw/reports
+        run: docker-compose -f docker-compose.yml -f docker-compose-test.yml up tests
   # Push image to GitHub Packages.
   # See also https://docs.docker.com/docker-hub/builds/
   push:
